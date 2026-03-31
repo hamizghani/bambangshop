@@ -81,3 +81,15 @@ This is the place for you to write reflections:
 #### Reflection Publisher-2
 
 #### Reflection Publisher-3
+
+1. In the Observer pattern diagram explained by the Head First Design Pattern book, Subscriber is defined as an interface. Explain based on your understanding of Observer design patterns, do we still need an interface (or trait in Rust) in this BambangShop case, or a single Model struct is enough?
+   
+    In the Observer pattern, the use of an interface (or trait in Rust) for the Subscriber allows for flexibility and extensibility, enabling different types of subscribers to be notified in various ways. In the BambangShop case, if all subscribers behave identically and no alternative notification mechanisms are needed, a single Model struct may be sufficient. However, if future requirements might introduce different subscriber behaviors, using a trait is preferable for scalability and adherence to the design pattern.
+
+2. id in Program and url in Subscriber is intended to be unique. Explain based on your understanding, is using Vec (list) sufficient or using DashMap (map/dictionary) like we currently use is necessary for this case?
+   
+    Using a Vec (list) is sufficient for small datasets, but it requires manual searching to enforce uniqueness, which can be inefficient as the data grows. DashMap (or a HashMap) provides constant-time lookups and enforces uniqueness by key, making it more suitable and efficient for ensuring unique ids or urls, especially in concurrent or larger-scale scenarios.
+
+3. When programming using Rust, we are enforced by rigorous compiler constraints to make a thread-safe program. In the case of the List of Subscribers (SUBSCRIBERS) static variable, we used the DashMap external library for thread safe HashMap. Explain based on your understanding of design patterns, do we still need DashMap or we can implement Singleton pattern instead?
+   
+    The Singleton pattern ensures a single instance of a resource, but does not inherently provide thread safety for concurrent access. DashMap is specifically designed for thread-safe concurrent access to a map. In this case, using DashMap is necessary to ensure both thread safety and efficient concurrent access, while Singleton could be used to ensure only one instance of the map exists. Both can be combined if needed, but DashMap is still required for safe concurrent operations.

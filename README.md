@@ -93,3 +93,15 @@ This is the place for you to write reflections:
 3. When programming using Rust, we are enforced by rigorous compiler constraints to make a thread-safe program. In the case of the List of Subscribers (SUBSCRIBERS) static variable, we used the DashMap external library for thread safe HashMap. Explain based on your understanding of design patterns, do we still need DashMap or we can implement Singleton pattern instead?
    
     The Singleton pattern ensures a single instance of a resource, but does not inherently provide thread safety for concurrent access. DashMap is specifically designed for thread-safe concurrent access to a map. In this case, using DashMap is necessary to ensure both thread safety and efficient concurrent access, while Singleton could be used to ensure only one instance of the map exists. Both can be combined if needed, but DashMap is still required for safe concurrent operations.
+
+1. In the Model-View Controller (MVC) compound pattern, there is no “Service” and “Repository”. Model in MVC covers both data storage and business logic. Explain based on your understanding of design principles, why we need to separate “Service” and “Repository” from a Model?
+   
+    Separating "Service" and "Repository" from the Model follows the Single Responsibility Principle and improves code maintainability. The Repository handles data access and storage, while the Service contains business logic. This separation makes the codebase easier to test, extend, and modify, as changes in business logic or data storage do not affect each other. It also clarifies the responsibilities of each component, leading to a cleaner architecture.
+
+2. What happens if we only use the Model? Explain your imagination on how the interactions between each model (Program, Subscriber, Notification) affect the code complexity for each model?
+   
+    If only the Model is used, each model would need to handle data access, business logic, and possibly even controller logic. This would lead to tightly coupled code, making each model complex and harder to maintain. Interactions between Program, Subscriber, and Notification would become tangled, increasing the risk of bugs and making future changes more difficult. The code would lose modularity and become less scalable.
+
+3. Have you explored more about Postman? Tell us how this tool helps you to test your current work. You might want to also list which features in Postman you are interested in or feel like it is helpful to help your Group Project or any of your future software engineering projects.
+   
+    Yes, I have explored Postman. It is very helpful for testing REST APIs by allowing me to send requests and view responses easily. Features like collections, environment variables, and automated tests make it efficient to organize and repeat tests. The ability to share collections with teammates and use mock servers is also valuable for group projects and future software engineering work.
